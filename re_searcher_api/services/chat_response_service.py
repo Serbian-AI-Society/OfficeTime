@@ -52,6 +52,7 @@ def generate_chat_response(user_message_body):
             sticky_note = create_sticky_note(function_params["title"], function_params["description"])
             response_message = "Beleška uspešno dodata!"
             conversation.append({"role": "assistant", "content": response_message})
+            citations = []
 
     else:
         response_message = response.choices[0].message.content
