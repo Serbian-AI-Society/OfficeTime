@@ -7,7 +7,7 @@ session = boto3.Session(
     aws_secret_access_key=aws_secret_access_key,
 )
 
-knowledge_base_client = session.client(service_name="bedrock-agent-runtime")
+knowledge_base_client = session.client(service_name="bedrock-agent-runtime", region_name="us-east-1")
 
 
 def get_document_citations(user_message, document_file_name):
