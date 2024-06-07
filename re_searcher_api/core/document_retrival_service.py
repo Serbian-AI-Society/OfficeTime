@@ -1,3 +1,9 @@
+"""
+file: document_retrival_service.py
+description: response citations processing
+"""
+
+
 import boto3
 import re
 from srtools import cyrillic_to_latin
@@ -10,6 +16,12 @@ session = boto3.Session(
 )
 
 knowledge_base_client = session.client(service_name="bedrock-agent-runtime")
+
+"""
+name: get_document_citations
+params: user_message, document_file_name
+description: returns the citations array with formatted text from response body JSON
+"""
 
 
 def get_document_citations(user_message, document_file_name):
@@ -32,6 +44,13 @@ def get_document_citations(user_message, document_file_name):
         citations.append(format_document_text(retrievedResult['content']['text']))
 
     return citations
+
+
+"""
+name: format_document_text
+params: text sentence
+response: returns a formatted sentence so the content fed to the OpenAI API is uniform
+"""
 
 
 def format_document_text(text):

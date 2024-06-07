@@ -1,3 +1,8 @@
+"""
+file: chat_response_service
+description: This package contains methods that handle response coming from the AWS instance
+"""
+
 from openai import OpenAI
 
 from consts import openai_api_key
@@ -6,6 +11,12 @@ from core.document_retrival_service import get_document_citations
 client = OpenAI(
     api_key=openai_api_key
 )
+
+"""
+name: generate_chat_response
+params: user message body JSON
+description: This method processes the response JSON from the AWS instance, extracts the relevant data and calls the OpenAI API
+"""
 
 
 def generate_chat_response(user_message_body):
@@ -41,6 +52,18 @@ def generate_chat_response(user_message_body):
                            document_keywords=None, citations=citations)
 
 
+"""
+name: format_response
+params: 
+    conversation -> user data body JSON subarray containing conversation roles
+    assistant_response -> OpanAI API call return value based on the  
+    new_sticky_note -> returns object of type StickyNote in case user explicitly demands a sticky note to be created
+    document_keywords -> returns object of type DocKeywords in case user explicitly demands keyword extraction from the repsonse
+    citations -> user data body JSON subarray containing document citation done by bedrock
+description: response returns a key map containing conversational elements
+"""
+
+
 def format_response(conversation, assistant_response, new_sticky_note, document_keywords, citations):
     return {
         "conversation": conversation,
@@ -49,6 +72,14 @@ def format_response(conversation, assistant_response, new_sticky_note, document_
         "document_keywords": document_keywords,
         "citations": citations
     }
+
+
+"""
+name: shorten_conversation
+params: messages list
+description: shortens the messages list by retaining the last 20 elements.
+In case list is shorter than 20 elements, it will display the whole list.
+"""
 
 
 def shorten_conversation(messages):
