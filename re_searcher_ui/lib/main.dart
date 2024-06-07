@@ -23,10 +23,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'RE:searcher',
       theme: ThemeData(
-        textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
-        fontFamilyFallback: const [
-          'Noto Color Emoji',
-        ],
         colorScheme: ColorScheme.fromSeed(seedColor: lightGreen),
         useMaterial3: true,
       ),
