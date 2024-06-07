@@ -32,38 +32,35 @@ class _ChatContainerState extends State<ChatContainer> {
       ),
       child: BlocConsumer<ChatBloc, ChatState>(
         bloc: _bloc,
-        builder: (context, state) => SelectionArea(
-          focusNode: FocusNode(),
-          child: FractionallySizedBox(
-            widthFactor: 0.95,
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.visibleMessages.length,
-                    reverse: true,
-                    itemBuilder: (context, index) {
-                      var message =
-                          (state.visibleMessages.reversed.toList())[index];
-                      StatelessWidget bodyWidget;
+        builder: (context, state) => FractionallySizedBox(
+          widthFactor: 0.95,
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.visibleMessages.length,
+                  reverse: true,
+                  itemBuilder: (context, index) {
+                    var message =
+                        (state.visibleMessages.reversed.toList())[index];
+                    StatelessWidget bodyWidget;
 
-                      if (message.role == "user") {
-                        bodyWidget = UserChatMessage(message);
-                      } else if (message.role == "assistant") {
-                        bodyWidget = AiChatMessage(message);
-                      } else {
-                        bodyWidget = ErrorChatMessage(message);
-                      }
+                    if (message.role == "user") {
+                      bodyWidget = UserChatMessage(message);
+                    } else if (message.role == "assistant") {
+                      bodyWidget = AiChatMessage(message);
+                    } else {
+                      bodyWidget = ErrorChatMessage(message);
+                    }
 
-                      return getChatMessageWidget(
-                          bodyWidget, message.role ?? "user");
-                    },
-                  ),
+                    return getChatMessageWidget(
+                        bodyWidget, message.role ?? "user");
+                  },
                 ),
-                const ChatTextField()
-              ],
-            ),
+              ),
+              const ChatTextField()
+            ],
           ),
         ),
         listener: (context, state) {},

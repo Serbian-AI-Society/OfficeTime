@@ -1,8 +1,13 @@
 class ChatMessage {
   String? role;
   String? content;
+  List<String>? citations;
 
-  ChatMessage({this.role, this.content});
+  ChatMessage({
+    this.role,
+    this.content,
+    this.citations,
+  });
 
   ChatMessage.fromJson(Map<String, dynamic> json) {
     role = json['role'];

@@ -1,4 +1,4 @@
-import 'package:re_searcher_ui/core/model/conversation.dart';
+import 'package:re_searcher_ui/core/model/chat_message.dart';
 import 'package:re_searcher_ui/core/model/sticky_note.dart';
 
 class AiResponse {

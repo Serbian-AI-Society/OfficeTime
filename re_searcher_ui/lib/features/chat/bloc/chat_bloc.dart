@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:re_searcher_ui/core/domain/chat_repository.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/model/active_document.dart';
-import 'package:re_searcher_ui/core/model/conversation.dart';
+import 'package:re_searcher_ui/core/model/chat_message.dart';
 import 'package:re_searcher_ui/core/model/sticky_note.dart';
 import 'package:re_searcher_ui/core/model/user_message_body.dart';
 
@@ -45,7 +45,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             conversation: currentConversation));
 
         currentConversation = response.conversation ?? [];
-        visibleMessages.add(currentConversation.last);
+        var aiMessage = currentConversation.last;
+        aiMessage.citations = response.citations;
+        visibleMessages.add(aiMessage);
 
         var visibleConversationsByActiveDocument =
             Map<String, List<ChatMessage>>.from(

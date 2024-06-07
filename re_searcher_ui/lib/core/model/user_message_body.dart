@@ -1,5 +1,5 @@
 import 'package:re_searcher_ui/core/model/active_document.dart';
-import 'package:re_searcher_ui/core/model/conversation.dart';
+import 'package:re_searcher_ui/core/model/chat_message.dart';
 
 class UserMessageBody {
   ActiveDocument? activeDocument;
