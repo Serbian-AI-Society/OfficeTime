@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/model/sticky_note.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
@@ -46,13 +47,25 @@ class NotesContainer extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     if (state.visibleMessages.isEmpty)
-                      const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 30, horizontal: 0),
-                        child: Text(
-                          "Nemate beleški! Zamolite AI da kreira belešku za vas! 😄🧠",
-                          style: TextStyle(color: lightGray, fontSize: 16),
-                          textAlign: TextAlign.center,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 30, horizontal: 20),
+                        child: Column(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/Doc.svg",
+                              color: lightGray,
+                              width: 40,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                              "Nemate beleški! Zamolite AI da kreira belešku za vas! 😄🧠",
+                              style: TextStyle(color: lightGray, fontSize: 16),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       )
                     else
