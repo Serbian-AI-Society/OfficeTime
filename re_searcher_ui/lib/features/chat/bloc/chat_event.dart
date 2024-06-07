@@ -8,3 +8,5 @@ class SetActiveDocumentEvent extends ChatEvent {
     required this.document,
   });
 }
+
+class InitChatBlocEvent extends ChatEvent {}

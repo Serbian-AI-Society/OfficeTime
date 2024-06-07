@@ -58,7 +58,12 @@ class SideMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      color: darkGray,
+      decoration: const BoxDecoration(
+        color: darkGray,
+        border: Border(
+          right: BorderSide(width: 3, color: lightGray),
+        ),
+      ),
       child: BlocBuilder<ChatBloc, ChatState>(
         bloc: _chatBloc,
         builder: (context, state) {
@@ -176,7 +181,7 @@ class MenuItem extends StatelessWidget {
               )
             else
               const SizedBox(
-                width: 20,
+                width: 17,
               ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -195,7 +200,7 @@ class MenuItem extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

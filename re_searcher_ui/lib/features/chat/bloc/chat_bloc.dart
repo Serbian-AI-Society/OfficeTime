@@ -9,5 +9,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<SetActiveDocumentEvent>((event, emit) {
       emit(state.copyWith(currentDocument: event.document));
     });
+
+    on<InitChatBlocEvent>((event, emit) {
+      if (state.currentDocument == null) {
+        emit(state.copyWith(
+            currentDocument: ActiveDocument(
+                name: "Don Kihot",
+                filename: "don_kihot.pdf",
+                description: "Čuvena novela Servantesa.")));
+      }
+    });
   }
 }
