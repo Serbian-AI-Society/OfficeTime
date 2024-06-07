@@ -2,6 +2,7 @@ from openai import OpenAI
 
 from consts import openai_api_key
 from core.document_retrival_service import get_document_citations
+from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 
 client = OpenAI(
     api_key=openai_api_key
@@ -11,11 +12,13 @@ client = OpenAI(
 def generate_chat_response(user_message_body):
     # 1. Extract user message
     user_message = user_message_body["conversation"][-1]["content"]
-    document_name = user_message_body["active_document"]["filename"]
+    document = user_message_body["active_document"]
     conversation = user_message_body["conversation"]
 
     # 2. Find relevant info from documents -> insert doc data into context
-    citations = get_document_citations(user_message, document_name)
+    citations = get_document_citations(user_message, document["filename"])
+    conversation.append(format_system_message(get_citations_system_message(citations)))
+    conversation.insert(0, format_system_message(get_system_prompt(document)))
 
     # 3. Call OpenAI API:
     #   -> Generate response with citation
