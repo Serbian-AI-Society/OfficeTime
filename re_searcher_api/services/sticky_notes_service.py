@@ -20,7 +20,7 @@ def get_openai_functions():
                             "description": "Content of the note.",
                         },
                     },
-                    "required": ["location", "format"],
+                    "required": ["title", "description"],
                 },
             }
         }
