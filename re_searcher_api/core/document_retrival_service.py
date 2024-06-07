@@ -3,19 +3,10 @@ file: document_retrival_service.py
 description: response citations processing
 """
 
-
-import boto3
 import re
 from srtools import cyrillic_to_latin
-
-from consts import knowledge_base_id, aws_access_key_id, aws_secret_access_key
-
-session = boto3.Session(
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-)
-
-knowledge_base_client = session.client(service_name="bedrock-agent-runtime", region_name="us-east-1")
+from client import knowledge_base_client
+from consts import knowledge_base_id
 
 """
 name: get_document_citations

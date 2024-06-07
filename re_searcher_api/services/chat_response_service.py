@@ -1,15 +1,9 @@
 import json
-
-from openai import OpenAI
-
-from consts import openai_api_key
+from client import openai_client
 from core.document_retrival_service import get_document_citations
 from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.sticky_notes_service import get_openai_functions, create_sticky_note
-from services.suggestion_service import extract_topic, generate_continuation_questions
-client = OpenAI(
-    api_key=openai_api_key
-)
+from services.suggestion_service import generate_continuation_questions
 
 """
 name: generate_chat_response
@@ -37,7 +31,7 @@ def generate_chat_response(user_message_body):
     #   -> Generate response with citation
     #   -> Address function: -> Add sticky note
     #                        -> List keywords for that document
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=conversation,
         tools=get_openai_functions(),
@@ -67,7 +61,7 @@ def generate_chat_response(user_message_body):
     conversation = shorten_conversation(conversation)
 
     # 5. Generate a suggested message based on the chat context
-    continuation_questions = generate_continuation_questions(user_message_body)
+    continuation_questions = generate_continuation_questions(conversation)
 
     # 6. Format response
     return format_response(conversation=conversation, assistant_response=response_message, new_sticky_note=sticky_note,
