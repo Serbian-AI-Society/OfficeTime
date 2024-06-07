@@ -35,6 +35,7 @@ def get_document_citations(user_message, document_file_name):
 
 
 def format_document_text(text):
+    t_sentence = ""
     # In case cyrillic alphabet is used, convert it to latin
     if re.search('[\u0400-\u04FF]', text):
         t_sentence = cyrillic_to_latin(text)
