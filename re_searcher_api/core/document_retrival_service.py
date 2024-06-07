@@ -15,7 +15,7 @@ session = boto3.Session(
     aws_secret_access_key=aws_secret_access_key,
 )
 
-knowledge_base_client = session.client(service_name="bedrock-agent-runtime")
+knowledge_base_client = session.client(service_name="bedrock-agent-runtime", region_name="us-east-1")
 
 """
 name: get_document_citations
@@ -34,14 +34,15 @@ def get_document_citations(user_message, document_file_name):
         },
         retrievalConfiguration={
             'vectorSearchConfiguration': {
-                'numberOfResults': 5,
+                'numberOfResults': 10,
                 # 'overrideSearchType': "HYBRID",
             }
         }
     )
 
     for retrievedResult in response["retrievalResults"]:
-        citations.append(format_document_text(retrievedResult['content']['text']))
+        if document_file_name in retrievedResult["location"]["s3Location"]["uri"]:
+            citations.append(format_document_text(retrievedResult['content']['text']))
 
     return citations
 
