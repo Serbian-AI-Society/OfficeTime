@@ -1,13 +1,18 @@
-import boto3
+"""
+file: document_retrival_service.py
+description: response citations processing
+"""
 
-from consts import knowledge_base_id, aws_access_key_id, aws_secret_access_key
+import re
+from srtools import cyrillic_to_latin
+from client import knowledge_base_client
+from consts import knowledge_base_id
 
-session = boto3.Session(
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-)
-
-knowledge_base_client = session.client(service_name="bedrock-agent-runtime", region_name="us-east-1")
+"""
+name: get_document_citations
+params: user_message, document_file_name
+description: returns the citations array with formatted text from response body JSON
+"""
 
 
 def get_document_citations(user_message, document_file_name):
@@ -33,6 +38,16 @@ def get_document_citations(user_message, document_file_name):
     return citations
 
 
+"""
+name: format_document_text
+params: text sentence
+response: returns a formatted sentence so the content fed to the OpenAI API is uniform
+"""
+
+
 def format_document_text(text):
-    # TODO: Vuk
-    return text
+    t_sentence = ""
+    # In case cyrillic alphabet is used, convert it to latin
+    if re.search('[\u0400-\u04FF]', text):
+        t_sentence = cyrillic_to_latin(text)
+    return t_sentence
