@@ -2,7 +2,8 @@ part of 'chat_bloc.dart';
 
 class ChatState {
   ActiveDocument? currentDocument;
-  Map<ActiveDocument, List<ChatMessage>> conversationsByActiveDocument;
+  Map<ActiveDocument, List<ChatMessage>> visibleConversationsByActiveDocument;
+  Map<ActiveDocument, List<StickyNote>> conversationsByActiveDocument;
   Map<ActiveDocument, List<StickyNote>> stickyNotesByActiveDocument;
   List<StickyNote> visibleNotes;
   List<ChatMessage> visibleMessages;
@@ -10,6 +11,7 @@ class ChatState {
   ChatState({
     this.currentDocument,
     this.conversationsByActiveDocument = const {},
+    this.visibleConversationsByActiveDocument = const {},
     this.stickyNotesByActiveDocument = const {},
     this.visibleNotes = const [],
     this.visibleMessages = const [],
@@ -17,13 +19,18 @@ class ChatState {
 
   ChatState copyWith({
     ActiveDocument? currentDocument,
-    Map<ActiveDocument, List<ChatMessage>>? conversationsByActiveDocument,
+    Map<ActiveDocument, List<ChatMessage>>?
+        visibleConversationsByActiveDocument,
+    Map<ActiveDocument, List<StickyNote>>? conversationsByActiveDocument,
     Map<ActiveDocument, List<StickyNote>>? stickyNotesByActiveDocument,
     List<StickyNote>? visibleNotes,
     List<ChatMessage>? visibleMessages,
   }) {
     return ChatState(
       currentDocument: currentDocument ?? this.currentDocument,
+      visibleConversationsByActiveDocument:
+          visibleConversationsByActiveDocument ??
+              this.visibleConversationsByActiveDocument,
       conversationsByActiveDocument:
           conversationsByActiveDocument ?? this.conversationsByActiveDocument,
       stickyNotesByActiveDocument:
