@@ -1,3 +1,5 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/home/ui/side_menu.dart';
@@ -73,10 +75,26 @@ class HomeScreen extends StatelessWidget {
                             SizedBox(
                               height: 30,
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [],
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  HomeAvatar(
+                                      fileName: "assets/vuk.jpg",
+                                      url: "https://github.com/vukca"),
+                                  HomeAvatar(
+                                      fileName: "assets/laslo.jpg",
+                                      url: "https://github.com/laslo-uri"),
+                                  HomeAvatar(
+                                      fileName: "assets/tara.jpg",
+                                      url: "https://github.com/tara-pogancev"),
+                                  HomeAvatar(
+                                      fileName: "assets/milan.jpg",
+                                      url: "https://github.com/milanp98"),
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -88,6 +106,33 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class HomeAvatar extends StatelessWidget {
+  const HomeAvatar({super.key, required this.fileName, required this.url});
+
+  final String fileName;
+  final String url;
+
+  void _openUrl() async {
+    js.context.callMethod('open', [url]);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          _openUrl();
+        },
+        child: CircleAvatar(
+          backgroundImage: AssetImage(fileName),
+          radius: 100,
+        ),
       ),
     );
   }
