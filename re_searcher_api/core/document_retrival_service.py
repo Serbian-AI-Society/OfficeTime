@@ -20,14 +20,15 @@ def get_document_citations(user_message, document_file_name):
         },
         retrievalConfiguration={
             'vectorSearchConfiguration': {
-                'numberOfResults': 5,
+                'numberOfResults': 10,
                 # 'overrideSearchType': "HYBRID",
             }
         }
     )
 
     for retrievedResult in response["retrievalResults"]:
-        citations.append(format_document_text(retrievedResult['content']['text']))
+        if document_file_name in retrievedResult["location"]["s3Location"]["uri"]:
+            citations.append(format_document_text(retrievedResult['content']['text']))
 
     return citations
 
