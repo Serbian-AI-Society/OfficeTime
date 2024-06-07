@@ -27,6 +27,11 @@ def get_document_citations(user_message, document_file_name):
     )
 
     for retrievedResult in response["retrievalResults"]:
-        citations.append(retrievedResult['content']['text'])
+        citations.append(format_document_text(retrievedResult['content']['text']))
 
     return citations
+
+
+def format_document_text(text):
+    # TODO: Vuk
+    return text
