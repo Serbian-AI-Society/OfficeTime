@@ -57,7 +57,7 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: 350,
       decoration: const BoxDecoration(
         color: darkGray,
         border: Border(
@@ -86,12 +86,12 @@ class SideMenu extends StatelessWidget {
                   _navigateHome(context);
                 },
               ),
-              MenuItem(
-                isDocuments: true,
-                isActive: false,
-                level: 1,
-                onClick: () {},
-              ),
+              // MenuItem(
+              //   isDocuments: true,
+              //   isActive: false,
+              //   level: 1,
+              //   onClick: () {},
+              // ),
               ...availableDocuments.map(
                 (doc) {
                   return MenuItem(

@@ -42,18 +42,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         visibleMessages.add(currentConversation.last);
 
         var visibleConversationsByActiveDocument =
-            state.visibleConversationsByActiveDocument;
+            Map<ActiveDocument, List<ChatMessage>>.from(
+                state.visibleConversationsByActiveDocument);
         var conversationsByActiveDocument =
-            state.visibleConversationsByActiveDocument;
+            Map<ActiveDocument, List<ChatMessage>>.from(
+                state.visibleConversationsByActiveDocument);
 
         visibleConversationsByActiveDocument[state.currentDocument!] =
             visibleMessages;
-
         conversationsByActiveDocument[state.currentDocument!] = visibleMessages;
 
-        emit(state.copyWith(
-            visibleMessages: visibleMessages,
-            conversationsByActiveDocument: conversationsByActiveDocument));
         if (response.newStickyNote != null) {
           var stickyNotesByActiveDocument =
               Map<ActiveDocument, List<StickyNote>>.from(
@@ -62,15 +60,18 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           var visibleNotes = List<StickyNote>.from(state.visibleNotes);
           visibleNotes.add(response.newStickyNote!);
 
-          stickyNotesByActiveDocument[state.currentDocument!] = (visibleNotes);
+          stickyNotesByActiveDocument[state.currentDocument!] = visibleNotes;
 
           emit(state.copyWith(
-              conversationsByActiveDocument: conversationsByActiveDocument,
-              visibleConversationsByActiveDocument:
-                  visibleConversationsByActiveDocument,
               stickyNotesByActiveDocument: stickyNotesByActiveDocument,
               visibleNotes: visibleNotes));
         }
+
+        emit(state.copyWith(
+            conversationsByActiveDocument: conversationsByActiveDocument,
+            visibleConversationsByActiveDocument:
+                visibleConversationsByActiveDocument,
+            visibleMessages: visibleMessages));
       } on Exception catch (error) {
         visibleMessages
             .add(ChatMessage(role: "ERROR", content: error.toString()));

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
-import 'package:re_searcher_ui/core/model/conversation.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
 import 'package:re_searcher_ui/features/chat/ui/chat_message_components.dart';
@@ -16,14 +15,6 @@ class ChatContainer extends StatefulWidget {
 
 class _ChatContainerState extends State<ChatContainer> {
   final _bloc = IC.getIt<ChatBloc>();
-
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  final List<ChatMessage> _messages = [];
-
-  void _addMessage(ChatMessage message) {
-    _messages.add(message);
-    _listKey.currentState?.insertItem(0);
-  }
 
   @override
   void initState() {

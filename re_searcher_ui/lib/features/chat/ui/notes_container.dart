@@ -11,7 +11,12 @@ class NotesContainer extends StatelessWidget {
 
   final _bloc = IC.getIt<ChatBloc>();
 
-  void _deleteNote(StickyNote note) {
+  void _deleteNote(StickyNote note, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Beleška obrisana!"),
+      ),
+    );
     _bloc.add(DeleteNoteEvent(note: note));
   }
 
@@ -46,7 +51,7 @@ class NotesContainer extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
-                    if (state.visibleMessages.isEmpty)
+                    if (state.visibleNotes.isEmpty)
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 30, horizontal: 20),
@@ -73,7 +78,7 @@ class NotesContainer extends StatelessWidget {
                         (note) => NoteCard(
                           note: note,
                           onDelete: () {
-                            _deleteNote(note);
+                            _deleteNote(note, context);
                           },
                         ),
                       ),
