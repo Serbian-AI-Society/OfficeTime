@@ -14,9 +14,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
   ChatBloc() : super(ChatState()) {
     on<SetActiveDocumentEvent>((event, emit) {
+      var visibleConversationsByActiveDocument =
+          state.visibleConversationsByActiveDocument;
+
+      var stickyNotesByActiveDocument = state.stickyNotesByActiveDocument;
+
       var visibleMessages =
-          state.visibleConversationsByActiveDocument[event.document];
-      var visibleNotes = state.stickyNotesByActiveDocument[event.document];
+          visibleConversationsByActiveDocument[event.document.filename] ?? [];
+      var visibleNotes =
+          stickyNotesByActiveDocument[event.document.filename] ?? [];
       emit(state.copyWith(
           currentDocument: event.document,
           visibleMessages: visibleMessages,
@@ -42,25 +48,25 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         visibleMessages.add(currentConversation.last);
 
         var visibleConversationsByActiveDocument =
-            Map<ActiveDocument, List<ChatMessage>>.from(
+            Map<String, List<ChatMessage>>.from(
                 state.visibleConversationsByActiveDocument);
-        var conversationsByActiveDocument =
-            Map<ActiveDocument, List<ChatMessage>>.from(
-                state.visibleConversationsByActiveDocument);
+        var conversationsByActiveDocument = Map<String, List<ChatMessage>>.from(
+            state.visibleConversationsByActiveDocument);
 
-        visibleConversationsByActiveDocument[state.currentDocument!] =
+        visibleConversationsByActiveDocument[
+            state.currentDocument?.filename ?? ""] = visibleMessages;
+        conversationsByActiveDocument[state.currentDocument?.filename ?? ""] =
             visibleMessages;
-        conversationsByActiveDocument[state.currentDocument!] = visibleMessages;
 
         if (response.newStickyNote != null) {
-          var stickyNotesByActiveDocument =
-              Map<ActiveDocument, List<StickyNote>>.from(
-                  state.stickyNotesByActiveDocument);
+          var stickyNotesByActiveDocument = Map<String, List<StickyNote>>.from(
+              state.stickyNotesByActiveDocument);
 
           var visibleNotes = List<StickyNote>.from(state.visibleNotes);
           visibleNotes.add(response.newStickyNote!);
 
-          stickyNotesByActiveDocument[state.currentDocument!] = visibleNotes;
+          stickyNotesByActiveDocument[state.currentDocument?.filename ?? ""] =
+              visibleNotes;
 
           emit(state.copyWith(
               stickyNotesByActiveDocument: stickyNotesByActiveDocument,
@@ -88,7 +94,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
       visibleNotes.remove(event.note);
       if (currentDocument != null) {
-        stickyNotesByActiveDocument[currentDocument] = visibleNotes;
+        stickyNotesByActiveDocument[currentDocument.filename ?? ""] =
+            visibleNotes;
       }
 
       emit(
