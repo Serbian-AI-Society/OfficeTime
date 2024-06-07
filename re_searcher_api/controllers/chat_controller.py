@@ -1,17 +1,20 @@
-chat_controller = Namespace("api")
-
-from flask_restx import Resource, Namespace
+import traceback
 
 from core.authentication import authenticate
-from service.knowledge_base.knowledge_base_service import get_knowledge_response
+from flask_restx import Resource, Namespace
 
-@chat_controller.route("/chat")
+from services.chat_response_service import generate_chat_response
+
+chat_controller_api = Namespace("api")
+
+
+@chat_controller_api.route("/chat")
 @authenticate
 class AiResponseController(Resource):
     def post(self):
         try:
-            user_messages = knowledge_base_api.payload
-            response = get_knowledge_response(user_messages)
+            user_messages = chat_controller_api.payload # JSON body of the API request
+            response = generate_chat_response(user_messages)
             return response, 201
         except Exception as e:
             print(traceback.format_exc())
@@ -19,7 +22,7 @@ class AiResponseController(Resource):
 
     def get(self):
         try:
-            response = 1
+            response = "Test success!"
             return response, 201
         except Exception as e:
             print(traceback.format_exc())
