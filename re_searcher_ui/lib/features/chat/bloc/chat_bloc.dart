@@ -1,15 +1,83 @@
 import 'package:bloc/bloc.dart';
+import 'package:re_searcher_ui/core/domain/chat_repository.dart';
+import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/model/active_document.dart';
 import 'package:re_searcher_ui/core/model/conversation.dart';
 import 'package:re_searcher_ui/core/model/sticky_note.dart';
+import 'package:re_searcher_ui/core/model/user_message_body.dart';
 
 part 'chat_event.dart';
 part 'chat_state.dart';
 
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
+  final ChatRepository chatRepository = IC.getIt();
+
   ChatBloc() : super(ChatState()) {
     on<SetActiveDocumentEvent>((event, emit) {
-      emit(state.copyWith(currentDocument: event.document));
+      var visibleMessages =
+          state.visibleConversationsByActiveDocument[event.document];
+      var visibleNotes = state.stickyNotesByActiveDocument[event.document];
+      emit(state.copyWith(
+          currentDocument: event.document,
+          visibleMessages: visibleMessages,
+          visibleNotes: visibleNotes));
+    });
+
+    on<SendMessageEvet>((event, emit) async {
+      var userMessage = ChatMessage(role: "user", content: event.message);
+      var visibleMessages = List<ChatMessage>.from(state.visibleMessages);
+      var currentConversation = List<ChatMessage>.from(
+          state.conversationsByActiveDocument[state.currentDocument] ?? []);
+
+      visibleMessages.add(userMessage);
+      currentConversation.add(userMessage);
+
+      emit(state.copyWith(visibleMessages: visibleMessages, isLoading: true));
+      try {
+        final response = await chatRepository.getAiResponse(UserMessageBody(
+            activeDocument: state.currentDocument,
+            conversation: currentConversation));
+
+        currentConversation = response.conversation ?? [];
+        visibleMessages.add(currentConversation.last);
+
+        var visibleConversationsByActiveDocument =
+            state.visibleConversationsByActiveDocument;
+        var conversationsByActiveDocument =
+            state.visibleConversationsByActiveDocument;
+
+        visibleConversationsByActiveDocument[state.currentDocument!] =
+            visibleMessages;
+
+        conversationsByActiveDocument[state.currentDocument!] = visibleMessages;
+
+        emit(state.copyWith(
+            visibleMessages: visibleMessages,
+            conversationsByActiveDocument: conversationsByActiveDocument));
+        if (response.newStickyNote != null) {
+          var stickyNotesByActiveDocument =
+              Map<ActiveDocument, List<StickyNote>>.from(
+                  state.stickyNotesByActiveDocument);
+
+          var visibleNotes = List<StickyNote>.from(state.visibleNotes);
+          visibleNotes.add(response.newStickyNote!);
+
+          stickyNotesByActiveDocument[state.currentDocument!] = (visibleNotes);
+
+          emit(state.copyWith(
+              conversationsByActiveDocument: conversationsByActiveDocument,
+              visibleConversationsByActiveDocument:
+                  visibleConversationsByActiveDocument,
+              stickyNotesByActiveDocument: stickyNotesByActiveDocument,
+              visibleNotes: visibleNotes));
+        }
+      } on Exception catch (error) {
+        visibleMessages
+            .add(ChatMessage(role: "ERROR", content: error.toString()));
+        emit(state.copyWith(visibleMessages: visibleMessages));
+      } finally {
+        emit(state.copyWith(isLoading: false));
+      }
     });
 
     on<DeleteNoteEvent>((event, emit) {
@@ -29,14 +97,16 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       );
     });
 
-    on<InitChatBlocEvent>((event, emit) {
-      if (state.currentDocument == null) {
-        emit(state.copyWith(
-            currentDocument: ActiveDocument(
-                name: "Don Kihot",
-                filename: "don_kihot.pdf",
-                description: "Čuvena novela Servantesa.")));
-      }
-    });
+    on<InitChatBlocEvent>(
+      (event, emit) {
+        if (state.currentDocument == null) {
+          emit(state.copyWith(
+              currentDocument: ActiveDocument(
+                  name: "Don Kihot",
+                  filename: "don_kihot.pdf",
+                  description: "Čuvena novela Servantesa.")));
+        }
+      },
+    );
   }
 }

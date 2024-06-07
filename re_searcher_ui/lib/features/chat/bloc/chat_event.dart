@@ -17,3 +17,10 @@ class DeleteNoteEvent extends ChatEvent {
     required this.note,
   });
 }
+
+class SendMessageEvet extends ChatEvent {
+  String message;
+  SendMessageEvet({
+    required this.message,
+  });
+}

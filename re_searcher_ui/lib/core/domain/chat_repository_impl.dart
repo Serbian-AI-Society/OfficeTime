@@ -7,7 +7,7 @@ import 'package:re_searcher_ui/core/model/user_message_body.dart';
 class ChatRepositoryImpl implements ChatRepository {
   Dio dio;
 
-  final String baseUrl = 'localhost:5000/api';
+  final String baseUrl = 'http://localhost:5000/api';
 
   ChatRepositoryImpl({
     required this.dio,
