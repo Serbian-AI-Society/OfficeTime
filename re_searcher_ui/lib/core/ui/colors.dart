@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 const primaryGreen = Color(0xFF36DB71);
+const pureWhite = Color.fromARGB(255, 255, 255, 255);
 const white = Color(0xFFDEDEDE);
 const darkGray = Color(0xFF262626);
 const mediumGray = Color(0xFF424242);

@@ -70,18 +70,18 @@ class ChatBody extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Padding(
-              padding: EdgeInsets.all(40),
+              padding: const EdgeInsets.all(40),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
+                  const Flexible(
                     flex: 2,
                     child: ChatContainer(),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Flexible(

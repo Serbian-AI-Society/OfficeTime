@@ -10,3 +10,10 @@ class SetActiveDocumentEvent extends ChatEvent {
 }
 
 class InitChatBlocEvent extends ChatEvent {}
+
+class DeleteNoteEvent extends ChatEvent {
+  final StickyNote note;
+  DeleteNoteEvent({
+    required this.note,
+  });
+}
