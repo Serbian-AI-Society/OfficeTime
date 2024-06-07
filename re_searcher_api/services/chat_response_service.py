@@ -6,7 +6,7 @@ from consts import openai_api_key
 from core.document_retrival_service import get_document_citations
 from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.sticky_notes_service import get_openai_functions, create_sticky_note
-
+from services.suggestion_service import extract_topic, generate_continuation_questions
 client = OpenAI(
     api_key=openai_api_key
 )
@@ -66,9 +66,12 @@ def generate_chat_response(user_message_body):
     # 4. Shorten the conversation
     conversation = shorten_conversation(conversation)
 
-    # 5. Format response
+    # 5. Generate a suggested message based on the chat context
+    continuation_questions = generate_continuation_questions(user_message_body)
+
+    # 6. Format response
     return format_response(conversation=conversation, assistant_response=response_message, new_sticky_note=sticky_note,
-                           document_keywords=document_keyword, citations=citations)
+                           document_keywords=document_keyword, citations=citations, continuation_questions=continuation_questions)
 
 
 """
@@ -83,13 +86,14 @@ description: response returns a key map containing conversational elements
 """
 
 
-def format_response(conversation, assistant_response, new_sticky_note, document_keywords, citations):
+def format_response(conversation, assistant_response, new_sticky_note, document_keywords, citations, continuation_questions):
     return {
         "conversation": conversation,
         "assistant_response": assistant_response,
         "new_sticky_note": new_sticky_note,
         "document_keywords": document_keywords,
-        "citations": citations
+        "citations": citations,
+        "continuation_questions": continuation_questions
     }
 
 
