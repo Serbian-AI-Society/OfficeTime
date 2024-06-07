@@ -1,4 +1,6 @@
 import boto3
+import re
+from srtools import cyrillic_to_latin
 
 from consts import knowledge_base_id, aws_access_key_id, aws_secret_access_key
 
@@ -33,5 +35,7 @@ def get_document_citations(user_message, document_file_name):
 
 
 def format_document_text(text):
-    # TODO: Vuk
-    return text
+    # In case cyrillic alphabet is used, convert it to latin
+    if re.search('[\u0400-\u04FF]', text):
+        t_sentence = cyrillic_to_latin(text)
+    return t_sentence
