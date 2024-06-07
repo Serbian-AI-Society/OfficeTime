@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'RE:searcher',
       theme: ThemeData(
+        // fontFamilyFallback: const [
+        //   'Noto Color Emoji',
+        // ],
         colorScheme: ColorScheme.fromSeed(seedColor: lightGreen),
         useMaterial3: true,
       ),

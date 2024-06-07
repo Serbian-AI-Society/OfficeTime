@@ -52,7 +52,7 @@ class AiChatMessage extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 0.7,
       child: Align(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.centerLeft,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Container(
@@ -64,7 +64,7 @@ class AiChatMessage extends StatelessWidget {
                 bottomRight: Radius.circular(10),
               ),
               border: Border(
-                right: BorderSide(width: 10, color: white),
+                left: BorderSide(width: 10, color: white),
               ),
             ),
             child: Padding(
@@ -92,7 +92,7 @@ class ErrorChatMessage extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 0.7,
       child: Align(
-        alignment: Alignment.centerRight,
+        alignment: Alignment.centerLeft,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Container(
