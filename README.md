@@ -30,7 +30,7 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 
 ### Arhitektura rešenja
 
-<image src="assets/Architecture.png" alt="Arhitektura rešenja">
+<image src="assets/project_architecture.jpg" alt="Arhitektura rešenja">
 
 ### Dijagram slučajeva korišćenja
 
