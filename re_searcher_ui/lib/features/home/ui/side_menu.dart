@@ -67,45 +67,44 @@ class SideMenu extends StatelessWidget {
       child: BlocBuilder<ChatBloc, ChatState>(
         bloc: _chatBloc,
         builder: (context, state) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: SvgPicture.asset(
-                  "assets/Logo.svg",
-                  width: 240,
-                ),
-              ),
-              MenuItem(
-                isHome: true,
-                isActive: isHome,
-                level: 1,
-                onClick: () {
-                  _navigateHome(context);
-                },
-              ),
-              // MenuItem(
-              //   isDocuments: true,
-              //   isActive: false,
-              //   level: 1,
-              //   onClick: () {},
-              // ),
-              ...availableDocuments.map(
-                (doc) {
-                  return MenuItem(
-                    level: 2,
-                    document: doc,
-                    isActive:
-                        (state.currentDocument?.name == doc.name) && !isHome,
+          return SizedBox(
+            height: double.infinity,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: SvgPicture.asset(
+                      "assets/Logo.svg",
+                      width: 240,
+                    ),
+                  ),
+                  MenuItem(
+                    isHome: true,
+                    isActive: isHome,
+                    level: 1,
                     onClick: () {
-                      _navigateChat(context, doc);
+                      _navigateHome(context);
                     },
-                  );
-                },
+                  ),
+                  ...availableDocuments.map(
+                    (doc) {
+                      return MenuItem(
+                        level: 2,
+                        document: doc,
+                        isActive: (state.currentDocument?.name == doc.name) &&
+                            !isHome,
+                        onClick: () {
+                          _navigateChat(context, doc);
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
-            ],
+            ),
           );
         },
       ),

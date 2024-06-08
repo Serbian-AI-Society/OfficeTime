@@ -89,6 +89,7 @@ class AiChatMessage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SelectionArea(
                 focusNode: FocusNode(),
