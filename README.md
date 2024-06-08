@@ -1,6 +1,6 @@
 # RE:searcher
 
-Ovaj projekat se bavi razvojem inteligentnog asistenta. Njegova osnovna funkcija je da korisniku olakša pretragu informacija unutar njegovih dokumenata.
+Ovaj projekat se bavi razvojem inteligentnog asistenta. Njegova osnovna funkcija je da korisniku olakša pretragu informacija unutar ličnih dokumenata.
 
 ### Osobine alata:
 
@@ -19,7 +19,7 @@ Naš repozitorijum projekta se sastoji od dva direktorijuma: backend i frontend.
 
 ### Flutter - _re_searcher_ui_
 
-Frontend naše aplikacije koristi Flutter za korisnički interfejs. Hostovan je na Microsoft Azure Cloud-u unutar Docker kontejnera radi lakše skalabilnosti i održavanja. Za efikasno upravljanje stanjima koristi se Bloc šablon. Zahvaljujući Flutteru, aplikacija može da radi na svim mobilnim i desktop operativnim sistemima, uključujući web. Aplikacija je strukturirana po principima clean architecture, koristeći GetIt paket za Dependency Injection i Bloc pattern za praćenje stanja.
+Frontend naše aplikacije koristi Flutter za korisnički interfejs. Hostovan je na Microsoft Azure Cloud-u unutar Docker kontejnera radi lakše skalabilnosti i održavanja. Za efikasno upravljanje stanjima koristi se Bloc šablon. Zahvaljujući Flutteru, aplikacija može da radi na svim mobilnim i desktop platformama, kao i na webu. Aplikacija je strukturirana po principima clean architecture, koristeći GetIt paket za Dependency Injection i Bloc pattern za praćenje stanja.
 
 ### Flask - _re_searcher_api_
 
@@ -42,7 +42,7 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 ## Planirane Dodatne Funkcionalnosti:
 
 - Uvezivanje više dokumenata
-- Izvoz beleški u PDF
+- Izvoz beleški u PDF format
 - Grupisanje dokumenta
 - Prepoznavanje slika
 - Glasovna komunikacija
@@ -50,7 +50,7 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 
 ## OfficeTime Tim
 
-Predstavimo tim iza projekta RE:searcher
+Predstavljamo tim iza projekta RE:searcher
 Tara Pogančev | Vuk Čabrilo | Milan Popđurđev | Laslo Uri
 --- | --- | --- | ---
 <a href="https://www.linkedin.com/in/tara-pogancev/"><image src="re_searcher_ui/assets/tara.jpg" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="re_searcher_ui/assets/vuk.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="re_searcher_ui/assets/milan.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="re_searcher_ui/assets/laslo.jpg" height="auto" width="100" style="border-radius:0%"></a>
