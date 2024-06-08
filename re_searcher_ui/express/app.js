@@ -1,5 +1,6 @@
 const express = require('express')
 const axios = require('axios');
+const path = require('path');
 
 const app = express()
 const port = 3000
@@ -15,7 +16,7 @@ app.get('*', (_, res) => {
   res.sendFile('web/index.html', {root: __dirname }) 
 }); 
 
-app.use(express.static(__dirname + '/web'))
+app.use(express.static(__dirname + 'web'))
 
 app.use((req, res) => {
   res.redirect('/')
