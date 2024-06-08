@@ -103,12 +103,9 @@ class MessageSuggestions extends StatelessWidget {
             state.messageSuggestions!.isEmpty) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Expanded(
-              child: Wrap(
-                alignment: WrapAlignment.start,
-                runAlignment: WrapAlignment.start,
-                spacing: 4.0,
-                runSpacing: 4.0,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
                   ...state.messageSuggestions!.map(
                     (message) => Padding(
