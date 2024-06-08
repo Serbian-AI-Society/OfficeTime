@@ -13,7 +13,7 @@ from consts import knowledge_base_id
 """
 name: get_document_citations
 params: user_message, document_file_name
-description: returns the citations array with formatted text from response body JSON.
+description: returns the citations array with formatted text from response body JSON
 """
 
 
