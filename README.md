@@ -27,11 +27,17 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 
 ## Arhitektura rešenja i Dijagram slučajeva korišćenja
 
-![](path-to-image)
-
 ### Arhitektura rešenja
 
+<image src="../OfficeTime/assets/Architecture of RE_searcher.png" alt="Arhitektura rešenja">
+
 ### Dijagram slučajeva korišćenja
+
+<image src="../OfficeTime/assets/UseCase diagram of RE_searcher.png" alt="Image description">
+
+## Izgled aplikacije
+
+<image src="../OfficeTime/assets/Screenshot of RE_searcher.jpg" alt="Image description">
 
 ## Planirane Dodatne Funkcionalnosti:
 
@@ -41,3 +47,13 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 - Prepoznavanje slika
 - Glasovna komunikacija
 - Navigacija kroz istoriju dokumenata
+
+## OfficeTime Tim
+
+Predstavimo tim iza projekta RE:searcher
+Tara Pogančev | Vuk Čabrilo | Milan Popđurđev | Laslo Uri
+--- | --- | --- | ---
+<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="../OfficeTime/re_searcher_ui/assets/tara.jpg" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="../OfficeTime/re_searcher_ui/assets/vuk.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="../OfficeTime/re_searcher_ui/assets/milan.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="../OfficeTime/re_searcher_ui/assets/laslo.jpg" height="auto" width="100" style="border-radius:0%"></a>
+<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="../OfficeTime/assets/TeamMembers/TaraReal.png" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="../OfficeTime/assets/TeamMembers/VukReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="../OfficeTime/assets/TeamMembers/MilanReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="../OfficeTime/assets/TeamMembers/LasloReal.png" height="auto" width="100" style="border-radius:0%"></a>
+
+---
