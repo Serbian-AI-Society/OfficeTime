@@ -59,6 +59,7 @@ class _ChatContainerState extends State<ChatContainer> {
                   },
                 ),
               ),
+              MessageSuggestions(),
               const ChatTextField()
             ],
           ),
@@ -80,6 +81,57 @@ Widget getChatMessageWidget(Widget body, String author) {
       child: body,
     ),
   );
+}
+
+class MessageSuggestions extends StatelessWidget {
+  MessageSuggestions({super.key});
+
+  final _bloc = IC.getIt<ChatBloc>();
+
+  void _sendMessage(String message) async {
+    if (!_bloc.state.isLoading) {
+      _bloc.add(SendMessageEvet(message: message));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ChatBloc, ChatState>(
+      bloc: _bloc,
+      builder: (context, state) {
+        if (state.messageSuggestions != null ||
+            state.messageSuggestions!.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Expanded(
+              child: Wrap(
+                alignment: WrapAlignment.start,
+                runAlignment: WrapAlignment.start,
+                spacing: 4.0,
+                runSpacing: 4.0,
+                children: [
+                  ...state.messageSuggestions!.map(
+                    (message) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: ActionChip(
+                        backgroundColor: mediumGreen,
+                        label: Text(message),
+                        onPressed: () {
+                          _sendMessage(message);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
+  }
 }
 
 class ChatTextField extends StatefulWidget {
@@ -154,7 +206,8 @@ class _ChatTextFieldState extends State<ChatTextField> {
                 suffixIcon: IconButton(
                   icon: (!state.isLoading)
                       ? const Icon(Icons.send)
-                      : const CircularProgressIndicator(),
+                      : const SizedBox.square(
+                          dimension: 20, child: CircularProgressIndicator()),
                   color: white,
                   onPressed: (isEmpty)
                       ? null

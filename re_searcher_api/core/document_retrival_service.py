@@ -4,7 +4,9 @@ description: response citations processing
 """
 
 import re
+
 from srtools import cyrillic_to_latin
+
 from client import knowledge_base_client
 from consts import knowledge_base_id
 

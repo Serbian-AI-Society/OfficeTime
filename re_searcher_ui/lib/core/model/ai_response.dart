@@ -7,6 +7,7 @@ class AiResponse {
   StickyNote? newStickyNote;
   List<String>? documentKeywords;
   List<String>? citations;
+  List<String>? continuationQuestions;
 
   AiResponse({
     this.conversation = const [],
@@ -14,6 +15,7 @@ class AiResponse {
     this.newStickyNote,
     this.documentKeywords,
     this.citations,
+    this.continuationQuestions,
   });
 
   AiResponse.fromJson(Map<String, dynamic> json) {
@@ -34,6 +36,13 @@ class AiResponse {
         : null;
     citations =
         json['citations'] != null ? List<String>.from(json['citations']) : null;
+    try {
+      continuationQuestions = json['continuation_questions'] != null
+          ? List<String>.from(json['continuation_questions'])
+          : null;
+    } on Exception catch (error) {
+      continuationQuestions = [];
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +56,7 @@ class AiResponse {
     }
     data['document_keywords'] = documentKeywords;
     data['citations'] = citations;
+    data['continuation_questions'] = continuationQuestions;
     return data;
   }
 }

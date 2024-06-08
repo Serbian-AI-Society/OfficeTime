@@ -122,25 +122,29 @@ class AiChatMessage extends StatelessWidget {
                     children: List<Widget>.generate(
                       message.citations!.length,
                       (index) {
-                        return MouseRegion(
-                          cursor: SystemMouseCursors.click,
-                          child: GestureDetector(
-                            onTap: () {
-                              _openDialog(message.citations![index], context);
-                            },
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Text(
-                                '[${index + 1}]',
-                                style: const TextStyle(
-                                  color: primaryGreen,
-                                  decoration: TextDecoration.underline,
+                        if (message.citations![index] != "") {
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                _openDialog(message.citations![index], context);
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 4.0),
+                                child: Text(
+                                  '[${index + 1}]',
+                                  style: const TextStyle(
+                                    color: primaryGreen,
+                                    decoration: TextDecoration.underline,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return Container();
+                        }
                       },
                     ),
                   ),

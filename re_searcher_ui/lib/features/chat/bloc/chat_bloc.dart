@@ -16,7 +16,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
     on<SetActiveDocumentEvent>((event, emit) {
       var visibleConversationsByActiveDocument =
           state.visibleConversationsByActiveDocument;
-
       var stickyNotesByActiveDocument = state.stickyNotesByActiveDocument;
 
       var visibleMessages =
@@ -24,6 +23,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       var visibleNotes =
           stickyNotesByActiveDocument[event.document.filename] ?? [];
       emit(state.copyWith(
+          messageSuggestions: [],
           currentDocument: event.document,
           visibleMessages: visibleMessages,
           visibleNotes: visibleNotes));
@@ -33,7 +33,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       var userMessage = ChatMessage(role: "user", content: event.message);
       var visibleMessages = List<ChatMessage>.from(state.visibleMessages);
       var currentConversation = List<ChatMessage>.from(
-          state.conversationsByActiveDocument[state.currentDocument] ?? []);
+          state.conversationsByActiveDocument[
+                  state.currentDocument?.filename ?? ""] ??
+              []);
 
       visibleMessages.add(userMessage);
       currentConversation.add(userMessage);
@@ -58,7 +60,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         visibleConversationsByActiveDocument[
             state.currentDocument?.filename ?? ""] = visibleMessages;
         conversationsByActiveDocument[state.currentDocument?.filename ?? ""] =
-            visibleMessages;
+            currentConversation;
 
         if (response.newStickyNote != null) {
           var stickyNotesByActiveDocument = Map<String, List<StickyNote>>.from(
@@ -76,6 +78,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
         }
 
         emit(state.copyWith(
+            messageSuggestions: response.continuationQuestions,
             conversationsByActiveDocument: conversationsByActiveDocument,
             visibleConversationsByActiveDocument:
                 visibleConversationsByActiveDocument,
@@ -91,8 +94,9 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
     on<DeleteNoteEvent>((event, emit) {
       final currentDocument = state.currentDocument;
-      final stickyNotesByActiveDocument = state.stickyNotesByActiveDocument;
-      final visibleNotes = state.visibleNotes;
+      final stickyNotesByActiveDocument =
+          Map<String, List<StickyNote>>.from(state.stickyNotesByActiveDocument);
+      final visibleNotes = List<StickyNote>.from(state.visibleNotes);
 
       visibleNotes.remove(event.note);
       if (currentDocument != null) {

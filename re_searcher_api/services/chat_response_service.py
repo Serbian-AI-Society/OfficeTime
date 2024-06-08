@@ -1,4 +1,5 @@
 import json
+
 from client import openai_client
 from core.document_retrival_service import get_document_citations
 from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
@@ -8,7 +9,8 @@ from services.suggestion_service import generate_continuation_questions
 """
 name: generate_chat_response
 params: user message body JSON
-description: This method processes the response JSON from the AWS instance, extracts the relevant data and calls the OpenAI API
+description: This method processes the response JSON from the AWS instance, extracts the relevant data and calls the 
+OpenAI API
 """
 
 
@@ -36,7 +38,7 @@ def generate_chat_response(user_message_body):
         messages=conversation,
         tools=get_openai_functions(),
         tool_choice="auto",
-        max_tokens=500
+        max_tokens=300
     )
 
     # 3.5 Check for function calls
@@ -66,7 +68,8 @@ def generate_chat_response(user_message_body):
 
     # 6. Format response
     return format_response(conversation=conversation, assistant_response=response_message, new_sticky_note=sticky_note,
-                           document_keywords=document_keyword, citations=citations, continuation_questions=continuation_questions)
+                           document_keywords=document_keyword, citations=citations,
+                           continuation_questions=continuation_questions)
 
 
 """
@@ -75,13 +78,15 @@ params:
     conversation -> user data body JSON subarray containing conversation roles
     assistant_response -> OpanAI API call return value based on the  
     new_sticky_note -> returns object of type StickyNote in case user explicitly demands a sticky note to be created
-    document_keywords -> returns object of type DocKeywords in case user explicitly demands keyword extraction from the repsonse
+    document_keywords -> returns object of type DocKeywords in case user explicitly demands keyword extraction from 
+    the repsonse
     citations -> user data body JSON subarray containing document citation done by bedrock
 description: response returns a key map containing conversational elements
 """
 
 
-def format_response(conversation, assistant_response, new_sticky_note, document_keywords, citations, continuation_questions):
+def format_response(conversation, assistant_response, new_sticky_note, document_keywords, citations,
+                    continuation_questions):
     return {
         "conversation": conversation,
         "assistant_response": assistant_response,

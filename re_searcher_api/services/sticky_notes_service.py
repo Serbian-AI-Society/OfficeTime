@@ -7,17 +7,18 @@ def get_openai_functions():
             "type": "function",
             "function": {
                 "name": "create_sticky_note",
-                "description": "Create a new note based on the subject user has requested.",
+                "description": "Napravi novu belešku baziranu na nekoj činjenici ili zanimljivosti. Pozvati samo kada "
+                               "korisnik eksplicitno zatrazi kreiranje beleske.",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "title": {
                             "type": "string",
-                            "description": "Title of the note, short and concise",
+                            "description": "Naziv beleške, kratak i sadržajan.",
                         },
                         "description": {
                             "type": "string",
-                            "description": "Content of the note.",
+                            "description": "Sadržaj beleške, informativna logicka celina, do 200 karaktera.",
                         },
                     },
                     "required": ["title", "description"],

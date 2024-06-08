@@ -7,6 +7,7 @@ class ChatState {
   Map<String, List<StickyNote>> stickyNotesByActiveDocument;
   List<StickyNote> visibleNotes;
   List<ChatMessage> visibleMessages;
+  List<String>? messageSuggestions;
   bool isLoading;
 
   ChatState({
@@ -16,6 +17,7 @@ class ChatState {
     this.stickyNotesByActiveDocument = const {},
     this.visibleNotes = const [],
     this.visibleMessages = const [],
+    this.messageSuggestions = const [],
     this.isLoading = false,
   });
 
@@ -26,15 +28,21 @@ class ChatState {
     Map<String, List<StickyNote>>? stickyNotesByActiveDocument,
     List<StickyNote>? visibleNotes,
     List<ChatMessage>? visibleMessages,
+    List<String>? messageSuggestions,
     bool? isLoading,
   }) {
     return ChatState(
       currentDocument: currentDocument ?? this.currentDocument,
-      visibleConversationsByActiveDocument: visibleConversationsByActiveDocument ?? this.visibleConversationsByActiveDocument,
-      conversationsByActiveDocument: conversationsByActiveDocument ?? this.conversationsByActiveDocument,
-      stickyNotesByActiveDocument: stickyNotesByActiveDocument ?? this.stickyNotesByActiveDocument,
+      visibleConversationsByActiveDocument:
+          visibleConversationsByActiveDocument ??
+              this.visibleConversationsByActiveDocument,
+      conversationsByActiveDocument:
+          conversationsByActiveDocument ?? this.conversationsByActiveDocument,
+      stickyNotesByActiveDocument:
+          stickyNotesByActiveDocument ?? this.stickyNotesByActiveDocument,
       visibleNotes: visibleNotes ?? this.visibleNotes,
       visibleMessages: visibleMessages ?? this.visibleMessages,
+      messageSuggestions: messageSuggestions ?? this.messageSuggestions,
       isLoading: isLoading ?? this.isLoading,
     );
   }
