@@ -29,6 +29,9 @@ Aplikacija je podignuta na Cloud, tako da ju je moguće testirati bez pokretanja
 
 [https://flutter-prep-ded99.web.app/home](https://flutter-prep-ded99.web.app/home)
 
+# Dokumentacija PDF
+[RE:SEARCHER - Kompletna dokumentacija](https://github.com/Serbian-AI-Society/OfficeTime/blob/main/assets/REsearcher%20Dokumentacija.pdf)
+
 ## Implementacija
 
 Naš repozitorijum projekta se sastoji od dva direktorijuma: **backend** i **frontend**.
