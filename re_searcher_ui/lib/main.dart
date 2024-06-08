@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/router/app_router.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 
-void main() {
-  IC.setUp();
-    GoogleFonts.config.allowRuntimeFetching = true;
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setUrlStrategy(PathUrlStrategy());
+
+  await IC.setUp();
+  GoogleFonts.config.allowRuntimeFetching = true;
   runApp(const MyApp());
 }
 

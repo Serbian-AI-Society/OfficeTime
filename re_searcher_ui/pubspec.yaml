@@ -5,11 +5,12 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+    
   cupertino_icons: ^1.0.6
   flutter_bloc: ^8.1.5
   bloc: ^8.1.4
@@ -19,6 +20,9 @@ dependencies:
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.1
   url_launcher: ^6.3.0
+
+  flutter_web_plugins:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
