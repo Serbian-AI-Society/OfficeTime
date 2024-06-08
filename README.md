@@ -38,6 +38,8 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 
 ## Izgled aplikacije
 
+<image src="assets/showcase.gif" alt="Image description">
+
 <image src="assets/Screenshot1.jpg" alt="Image description">
 
 ## Planirane dodatne funkcionalnosti:
