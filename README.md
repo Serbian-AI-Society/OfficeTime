@@ -29,15 +29,15 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 
 ### Arhitektura rešenja
 
-<image src="../OfficeTime/assets/Architecture of RE_searcher.png" alt="Arhitektura rešenja">
+<image src="assets/Architecture.png" alt="Arhitektura rešenja">
 
 ### Dijagram slučajeva korišćenja
 
-<image src="../OfficeTime/assets/UseCase diagram of RE_searcher.png" alt="Image description">
+<image src="assets/UseCase.png" alt="Image description">
 
 ## Izgled aplikacije
 
-<image src="../OfficeTime/assets/Screenshot of RE_searcher.jpg" alt="Image description">
+<image src="assets/Screenshot.jpg" alt="Image description">
 
 ## Planirane Dodatne Funkcionalnosti:
 
@@ -53,7 +53,7 @@ Backend naše aplikacije koristi Flask mikro-okvir. Omogućava efikasnu interakc
 Predstavimo tim iza projekta RE:searcher
 Tara Pogančev | Vuk Čabrilo | Milan Popđurđev | Laslo Uri
 --- | --- | --- | ---
-<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="../re_searcher_ui/assets/tara.jpg" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="../re_searcher_ui/assets/vuk.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="../re_searcher_ui/assets/milan.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="..//re_searcher_ui/assets/laslo.jpg" height="auto" width="100" style="border-radius:0%"></a>
-<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="../assets/TeamMembers/TaraReal.png" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="../assets/TeamMembers/VukReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="../assets/TeamMembers/MilanReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="../assets/TeamMembers/LasloReal.png" height="auto" width="100" style="border-radius:0%"></a>
+<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="re_searcher_ui/assets/tara.jpg" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="re_searcher_ui/assets/vuk.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="re_searcher_ui/assets/milan.jpg" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="re_searcher_ui/assets/laslo.jpg" height="auto" width="100" style="border-radius:0%"></a>
+<a href="https://www.linkedin.com/in/tara-pogancev/"><image src="assets/TeamMembers/TaraReal.png" height="auto" width="100" style="border-radius:0%"></a>|<a href="https://www.linkedin.com/in/vuk-%C4%8Dabrilo-63b369207/"><image src="assets/TeamMembers/VukReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/milan-pop%C4%91ur%C4%91ev/"><image src="assets/TeamMembers/MilanReal.png" height="auto" width="100" style="border-radius:0%"></a> | <a href="https://www.linkedin.com/in/laslo-uri/"><image src="assets/TeamMembers/LasloReal.png" height="auto" width="100" style="border-radius:0%"></a>
 
 ---
