@@ -1,6 +1,16 @@
 # RE:searcher
 ## The Office Team
 
+![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
+![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
+
 Ovaj projekat se bavi razvojem **inteligentnog asistenta**. Njegova osnovna funkcija je da korisniku olakša pretragu informacija unutar ličnih dokumenata.
 
 ### Osobine alata:
@@ -13,6 +23,11 @@ Ovaj projekat se bavi razvojem **inteligentnog asistenta**. Njegova osnovna funk
 ### Cilj:
 
 Cilj je omogućiti korisnicima jednostavno pretraživanje i upravljanje dokumentima, formulisanje pitanja, kreiranje beleški, generisanje paragrafa i definisanje tema i apstrakta dokumenata.
+
+## Testiranje aplikacije
+Aplikacija je podignuta na Cloud, tako da ju je moguće testirati bez pokretanja lokalno. Kako je backend podešen da se skalira na 0, moguće je da će prilikom prvog poziva biti potrebno nekoliko sekundi duže. 
+
+[https://flutter-prep-ded99.web.app/home](https://flutter-prep-ded99.web.app/home)
 
 ## Implementacija
 
