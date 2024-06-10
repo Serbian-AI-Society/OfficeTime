@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:re_searcher_ui/core/domain/chat_repository.dart';
 import 'package:re_searcher_ui/core/extensions/dio_extensions.dart';
 import 'package:re_searcher_ui/core/model/ai_response.dart';
@@ -31,6 +32,22 @@ class ChatRepositoryImpl implements ChatRepository {
       return (AiResponse.fromJson(response.data));
     } on DioException catch (e) {
       throw e.processDioException();
+    }
+  }
+
+  @override
+  void pingServer() {
+    try {
+      dio.request(
+        "$baseUrl/chat",
+        options: Options(
+          method: 'GET',
+        ),
+      );
+    } on DioException catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

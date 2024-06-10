@@ -6,6 +6,7 @@ import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
 import 'package:re_searcher_ui/features/chat/ui/chat/chat_container.dart';
 import 'package:re_searcher_ui/features/chat/ui/notes/notes_container.dart';
+import 'package:re_searcher_ui/features/home/bloc/home_bloc.dart';
 import 'package:re_searcher_ui/features/home/ui/side_menu.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -13,8 +14,13 @@ class ChatScreen extends StatelessWidget {
 
   final _bloc = IC.getIt<ChatBloc>();
 
+  void _pingServer() {
+    IC.getIt<HomeBloc>().add(PingServerEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
+    _pingServer();
     _bloc.add(InitChatBlocEvent());
     return Scaffold(
       backgroundColor: mediumGray,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:re_searcher_ui/core/model/chat_message.dart';
 import 'package:re_searcher_ui/core/model/sticky_note.dart';
 
@@ -41,6 +42,9 @@ class AiResponse {
           ? List<String>.from(json['continuation_questions'])
           : null;
     } on Exception catch (error) {
+      if (kDebugMode) {
+        print(error);
+      }
       continuationQuestions = [];
     }
   }

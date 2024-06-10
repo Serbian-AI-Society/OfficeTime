@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:re_searcher_ui/core/domain/chat_repository.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/model/active_document.dart';
@@ -84,9 +85,18 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 visibleConversationsByActiveDocument,
             visibleMessages: visibleMessages));
       } on Exception catch (error) {
+        await Future.delayed(Durations.medium1);
         visibleMessages
             .add(ChatMessage(role: "ERROR", content: error.toString()));
-        emit(state.copyWith(visibleMessages: visibleMessages));
+        var visibleConversationsByActiveDocument =
+            Map<String, List<ChatMessage>>.from(
+                state.visibleConversationsByActiveDocument);
+        visibleConversationsByActiveDocument[
+            state.currentDocument?.filename ?? ""] = visibleMessages;
+        emit(state.copyWith(
+            visibleMessages: visibleMessages,
+            visibleConversationsByActiveDocument:
+                visibleConversationsByActiveDocument));
       } finally {
         emit(state.copyWith(isLoading: false));
       }

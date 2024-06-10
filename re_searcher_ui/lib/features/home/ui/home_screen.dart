@@ -1,14 +1,21 @@
 import 'dart:js' as js;
 
 import 'package:flutter/material.dart';
+import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
+import 'package:re_searcher_ui/features/home/bloc/home_bloc.dart';
 import 'package:re_searcher_ui/features/home/ui/side_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  void _pingServer() {
+    IC.getIt<HomeBloc>().add(PingServerEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
+    _pingServer();
     return Scaffold(
       backgroundColor: mediumGray,
       body: Row(
