@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'RE:searcher',
       theme: ThemeData(
+        textTheme: GoogleFonts.montserratTextTheme(),
         colorScheme: ColorScheme.fromSeed(seedColor: lightGreen),
         useMaterial3: true,
       ),

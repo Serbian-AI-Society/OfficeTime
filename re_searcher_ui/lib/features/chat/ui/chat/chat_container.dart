@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
-import 'package:re_searcher_ui/features/chat/ui/chat_message_components.dart';
+import 'package:re_searcher_ui/features/chat/ui/chat/chat_message_components.dart';
 
 class ChatContainer extends StatefulWidget {
   const ChatContainer({super.key});

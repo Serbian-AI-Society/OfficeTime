@@ -4,8 +4,8 @@ import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/model/active_document.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
-import 'package:re_searcher_ui/features/chat/ui/chat_container.dart';
-import 'package:re_searcher_ui/features/chat/ui/notes_container.dart';
+import 'package:re_searcher_ui/features/chat/ui/chat/chat_container.dart';
+import 'package:re_searcher_ui/features/chat/ui/notes/notes_container.dart';
 import 'package:re_searcher_ui/features/home/ui/side_menu.dart';
 
 class ChatScreen extends StatelessWidget {
