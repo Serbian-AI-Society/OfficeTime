@@ -2,8 +2,15 @@
 file: consts.py
 description: global constants
 """
-openai_api_key = "sk-proj-ZsM6B1D7ug99052NWGs3T3BlbkFJLvHuR76qMC3LoAy5XT4c"
+import os
+
+# OPENAI API
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
+# Password passed as a token necessary for all API calls
 api_password = "OfficeTimePassword"
-knowledge_base_id = "B7XUK2PH3W"
-aws_access_key_id = "AKIAW3MEATVE7LM6U34H"
-aws_secret_access_key = "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"
+
+# [Optional] AWS + Knowledge Base
+knowledge_base_id = os.environ.get("AWS_KNOWLEDGE_BASE_ID")
+aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")

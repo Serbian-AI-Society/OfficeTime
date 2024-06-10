@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:re_searcher_ui/core/domain/chat_repository.dart';
+import 'package:re_searcher_ui/core/extensions/dio_extensions.dart';
 import 'package:re_searcher_ui/core/model/ai_response.dart';
 import 'package:re_searcher_ui/core/model/user_message_body.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
   Dio dio;
 
-  // final String baseUrl = 'http://localhost:5000/api';
-  final String baseUrl =
-      'https://researcher-api.jollymoss-e2c94ce0.westeurope.azurecontainerapps.io/api';
+  final String baseUrl = 'http://localhost:5000/api';
+  // final String baseUrl =
+  //     'https://researcher-api.jollymoss-e2c94ce0.westeurope.azurecontainerapps.io/api';
 
   ChatRepositoryImpl({
     required this.dio,
@@ -17,22 +17,20 @@ class ChatRepositoryImpl implements ChatRepository {
 
   @override
   Future<AiResponse> getAiResponse(UserMessageBody userMessageBody) async {
-    var data = userMessageBody.toJson();
-    var response = await dio.request(
-      "$baseUrl/chat",
-      options: Options(
-        method: 'POST',
-      ),
-      data: data,
-    );
+    try {
+      var data = userMessageBody.toJson();
 
-    if (response.statusCode == 201) {
+      var response = await dio.request(
+        "$baseUrl/chat",
+        options: Options(
+          method: 'POST',
+        ),
+        data: data,
+      );
+
       return (AiResponse.fromJson(response.data));
-    } else {
-      if (kDebugMode) {
-        print(response.statusMessage);
-      }
-      throw (Exception("Error: ${response.statusMessage}"));
+    } on DioException catch (e) {
+      throw e.processDioException();
     }
   }
 }

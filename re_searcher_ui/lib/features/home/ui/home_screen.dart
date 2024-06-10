@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: darkGray,
-                        border: Border.all(width: 3, color: lightGray),
+                        border: Border.all(width: 2, color: lightGray),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.all(30),

@@ -61,7 +61,7 @@ class SideMenu extends StatelessWidget {
       decoration: const BoxDecoration(
         color: darkGray,
         border: Border(
-          right: BorderSide(width: 3, color: lightGray),
+          right: BorderSide(width: 2, color: lightGray),
         ),
       ),
       child: BlocBuilder<ChatBloc, ChatState>(

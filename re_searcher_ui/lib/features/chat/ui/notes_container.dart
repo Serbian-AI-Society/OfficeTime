@@ -28,7 +28,7 @@ class NotesContainer extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           color: darkGray,
-          border: Border.all(width: 3, color: lightGray),
+          border: Border.all(width: 2, color: lightGray),
         ),
         child: Padding(
           padding: const EdgeInsets.all(20),
