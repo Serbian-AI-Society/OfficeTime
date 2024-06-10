@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
@@ -37,28 +38,53 @@ class _ChatContainerState extends State<ChatContainer> {
           alignment: Alignment.bottomCenter,
           child: Column(
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: state.visibleMessages.length,
-                  reverse: true,
-                  itemBuilder: (context, index) {
-                    var message =
-                        (state.visibleMessages.reversed.toList())[index];
-                    StatelessWidget bodyWidget;
+              if (state.visibleMessages.isEmpty)
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          "assets/Send.svg",
+                          color: lightGray,
+                          width: 60,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          "Nema poruka! Započnite dopisivanje o dokumentu '${state.currentDocument?.filename ?? "null"}'",
+                          style:
+                              const TextStyle(color: lightGray, fontSize: 24),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              else
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: state.visibleMessages.length,
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      var message =
+                          (state.visibleMessages.reversed.toList())[index];
+                      StatelessWidget bodyWidget;
 
-                    if (message.role == "user") {
-                      bodyWidget = UserChatMessage(message);
-                    } else if (message.role == "assistant") {
-                      bodyWidget = AiChatMessage(message);
-                    } else {
-                      bodyWidget = ErrorChatMessage(message);
-                    }
+                      if (message.role == "user") {
+                        bodyWidget = UserChatMessage(message);
+                      } else if (message.role == "assistant") {
+                        bodyWidget = AiChatMessage(message);
+                      } else {
+                        bodyWidget = ErrorChatMessage(message);
+                      }
 
-                    return getChatMessageWidget(
-                        bodyWidget, message.role ?? "user");
-                  },
+                      return getChatMessageWidget(
+                          bodyWidget, message.role ?? "user");
+                    },
+                  ),
                 ),
-              ),
               MessageSuggestions(),
               const ChatTextField()
             ],
