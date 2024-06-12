@@ -1,9 +1,10 @@
 import json
 
 from client import openai_client
-from consts import use_aws_knowledge_base, openai_chat_model
+from consts import use_aws_knowledge_base, openai_chat_model, use_pinecone
 from services.chat.chat_system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.documents.aws_knowledge_base.document_retrival_service import get_document_citations_from_aws
+from services.documents.douments_service import get_citations_from_pinecone
 from services.sticky_notes.sticky_notes_service import get_openai_functions, create_sticky_note
 from services.suggestions.suggestion_service import generate_continuation_questions
 
@@ -26,9 +27,7 @@ def generate_chat_response(user_message_body):
     document_keyword = None
 
     # 2. Find relevant info from documents -> insert doc data into context
-    citations = []
-
-    # citations = get_document_citations(user_message, document["filename"])
+    citations = get_citations(user_message, document["filename"])
     conversation.append(format_system_message(get_citations_system_message(citations)))
     conversation.insert(0, format_system_message(get_system_prompt(document)))
 
@@ -113,10 +112,12 @@ def shorten_conversation(messages):
     return [message for message in messages if message.get("role") != "system"]
 
 
-def get_citations(user_message, filename):
+def get_citations(user_message, filename, topic=None):
     if use_aws_knowledge_base:
         return get_document_citations_from_aws(user_message, filename)
 
-    # TODO
-    # elif use_pinecone:
-    #     return
+    elif use_pinecone:
+        return get_citations_from_pinecone(user_message, filename, topic)
+
+    else:
+        return []
