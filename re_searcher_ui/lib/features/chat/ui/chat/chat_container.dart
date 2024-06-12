@@ -12,6 +12,7 @@ import 'package:re_searcher_ui/features/chat/ui/chat/message_suggestions.dart';
 import 'package:re_searcher_ui/features/chat/ui/chat/no_messages_container.dart';
 import 'package:re_searcher_ui/features/chat/ui/chat/user_message.dart';
 
+// ignore: must_be_immutable
 class ChatContainer extends StatefulWidget {
   const ChatContainer({super.key});
 
@@ -23,23 +24,33 @@ class _ChatContainerState extends State<ChatContainer> {
   final _bloc = IC.getIt<ChatBloc>();
 
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
+
+  bool _isMessagesEmpty = true;
   List<ChatMessage> _messages = [];
   ActiveDocument? _activeDocument;
 
   void _addMessage(ChatMessage message) {
     _messages.add(message);
+    setState(() {
+      _isMessagesEmpty = false;
+    });
     _listKey.currentState?.insertItem(0);
   }
 
-  void _setActiveDocument(ActiveDocument document) {
-    _activeDocument = document;
+  void _setDocument(ActiveDocument? document) {
+    setState(() {
+      _activeDocument = document;
+    });
   }
 
   void _setAllMessages(List<ChatMessage> messages) {
     _listKey.currentState?.removeAllItems((context, animation) => Container());
-    _messages = messages;
+    setState(() {
+      _messages = messages;
+    });
+
     _listKey.currentState
-        ?.insertAllItems(0, _messages.length, duration: Durations.medium4);
+        ?.insertAllItems(0, _messages.length, duration: Durations.short1);
   }
 
   @override
@@ -51,9 +62,9 @@ class _ChatContainerState extends State<ChatContainer> {
         color: darkGray,
         border: Border.all(width: 2, color: lightGray),
       ),
-      child: BlocConsumer<ChatBloc, ChatState>(
+      child: BlocListener<ChatBloc, ChatState>(
         bloc: _bloc,
-        builder: (context, state) => FractionallySizedBox(
+        child: FractionallySizedBox(
           widthFactor: 0.95,
           alignment: Alignment.bottomCenter,
           child: Column(
@@ -61,8 +72,9 @@ class _ChatContainerState extends State<ChatContainer> {
               Expanded(
                 child: Stack(
                   children: [
-                    if (state.visibleMessages.isEmpty)
-                      NoMessagesContainer(filename: _activeDocument?.filename),
+                    if (_isMessagesEmpty)
+                      NoMessagesContainer(
+                          filename: _activeDocument?.filename ?? "null"),
                     AnimatedList(
                       initialItemCount: _messages.length,
                       reverse: true,
@@ -91,14 +103,21 @@ class _ChatContainerState extends State<ChatContainer> {
             ],
           ),
         ),
+        // listenWhen: (previous, current) =>
+        //     previous.visibleMessages.length != current.visibleMessages.length ||
+        //     current.currentDocument?.filename !=
+        //         previous.currentDocument?.filename,
         listener: (context, state) {
-          if (_activeDocument?.filename == state.currentDocument?.filename) {
-            if (_messages.length < state.visibleMessages.length) {
-              _addMessage(state.visibleMessages.last);
-            }
-          } else {
-            _setActiveDocument(state.currentDocument!);
+          if (_activeDocument?.filename != state.currentDocument?.filename) {
+            _setDocument(state.currentDocument);
             _setAllMessages(state.visibleMessages);
+          } else if (_messages.length < state.visibleMessages.length) {
+            _addMessage(state.visibleMessages.last);
+            // for (int i = _messages.length;
+            //     i < state.visibleMessages.length;
+            //     i++) {
+            //   _addMessage(state.visibleMessages[i]);
+            // }
           }
         },
       ),

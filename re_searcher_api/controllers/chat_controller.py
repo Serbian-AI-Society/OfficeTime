@@ -19,11 +19,3 @@ class AiResponseController(Resource):
         except Exception as e:
             print(traceback.format_exc())
             return {"error": str(e)}, 500
-
-    def get(self):
-        try:
-            response = "Test success!"
-            return response, 201
-        except Exception as e:
-            print(traceback.format_exc())
-            return {"error": str(e)}, 500

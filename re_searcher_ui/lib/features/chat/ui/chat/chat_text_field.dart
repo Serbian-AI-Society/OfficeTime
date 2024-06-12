@@ -47,6 +47,7 @@ class _ChatTextFieldState extends State<ChatTextField> {
   Widget build(BuildContext context) {
     return BlocBuilder<ChatBloc, ChatState>(
       bloc: _bloc,
+      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),

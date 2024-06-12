@@ -1,7 +1,6 @@
 import json
 
 from client import openai_client
-from core.document_retrival_service import get_document_citations
 from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.sticky_notes_service import get_openai_functions, create_sticky_note
 from services.suggestion_service import generate_continuation_questions
@@ -25,7 +24,9 @@ def generate_chat_response(user_message_body):
     document_keyword = None
 
     # 2. Find relevant info from documents -> insert doc data into context
-    citations = get_document_citations(user_message, document["filename"])
+    citations = []
+
+    # citations = get_document_citations(user_message, document["filename"])
     conversation.append(format_system_message(get_citations_system_message(citations)))
     conversation.insert(0, format_system_message(get_system_prompt(document)))
 

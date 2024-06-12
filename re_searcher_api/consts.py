@@ -1,16 +1,20 @@
+from dotenv import load_dotenv
+
 """
 file: consts.py
 description: global constants
 """
 import os
 
-# OPENAI API
-openai_api_key = os.getenv("OPENAI_API_KEY")
+load_dotenv("./.env")
 
 # Password passed as a token necessary for all API calls
 api_password = "OfficeTimePassword"
 
+# OPENAI API
+openai_api_key = os.getenv("OPENAI_API_KEY")
+
 # [Optional] AWS + Knowledge Base
-knowledge_base_id = os.environ.get("AWS_KNOWLEDGE_BASE_ID")
-aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
-aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
+knowledge_base_id = os.getenv("AWS_KNOWLEDGE_BASE_ID")
+aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID")
+aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")

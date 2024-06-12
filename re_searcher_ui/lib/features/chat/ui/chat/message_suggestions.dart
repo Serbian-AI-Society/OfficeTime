@@ -19,6 +19,8 @@ class MessageSuggestions extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChatBloc, ChatState>(
       bloc: _bloc,
+      buildWhen: (previous, current) =>
+          previous.messageSuggestions != current.messageSuggestions,
       builder: (context, state) {
         if (state.messageSuggestions != null ||
             state.messageSuggestions!.isEmpty) {
