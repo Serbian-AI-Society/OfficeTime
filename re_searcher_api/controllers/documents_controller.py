@@ -21,8 +21,7 @@ class AiResponseController(Resource):
 
     def get(self):
         try:
-            get_citations_from_pinecone()
-            return 123, 201
+            return get_citations_from_pinecone(), 201
         except Exception as e:
             print(traceback.format_exc())
             return {"error": str(e)}, 500

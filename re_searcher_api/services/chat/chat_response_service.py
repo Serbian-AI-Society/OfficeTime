@@ -1,7 +1,7 @@
 import json
 
 from client import openai_client
-from consts import use_aws_knowledge_base
+from consts import use_aws_knowledge_base, openai_chat_model
 from services.chat.chat_system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.documents.aws_knowledge_base.document_retrival_service import get_document_citations_from_aws
 from services.sticky_notes.sticky_notes_service import get_openai_functions, create_sticky_note
@@ -37,7 +37,7 @@ def generate_chat_response(user_message_body):
     #   -> Address function: -> Add sticky note
     #                        -> List keywords for that document
     response = openai_client.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model=openai_chat_model,
         messages=conversation,
         tools=get_openai_functions(),
         tool_choice="auto",
@@ -117,5 +117,6 @@ def get_citations(user_message, filename):
     if use_aws_knowledge_base:
         return get_document_citations_from_aws(user_message, filename)
 
-    elif use_pinecone:
-        return
+    # TODO
+    # elif use_pinecone:
+    #     return

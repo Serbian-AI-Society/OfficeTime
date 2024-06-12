@@ -1,4 +1,5 @@
 from client import openai_client
+from consts import openai_embeddings_model
 
 
 # Function to chunk text
@@ -20,9 +21,9 @@ def get_embeddings_for_chunks(chunks):
     return embeddings
 
 
-def get_embeddings(text, model="text-embedding-3-small"):
+def get_embeddings(text):
     text = text.replace("\n", " ")
-    return openai_client.embeddings.create(input=[text], model=model).data[0].embedding
+    return openai_client.embeddings.create(input=[text], model=openai_embeddings_model).data[0].embedding
 
 
 def separate_text_from_pdf():

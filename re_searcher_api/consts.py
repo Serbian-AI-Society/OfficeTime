@@ -24,3 +24,7 @@ aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 
 pinecone_api = os.getenv("PINECONE_API")
 pinecone_index_name = "researcher"
+
+openai_embeddings_model = "text-embedding-3-small"
+openai_chat_model = "gpt-3.5-turbo"
+openai_completions_model = "gpt-3.5-turbo-instruct"
