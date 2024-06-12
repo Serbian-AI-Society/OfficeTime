@@ -1,9 +1,9 @@
 import json
 
 from client import openai_client
-from core.system_prompts import get_citations_system_message, get_system_prompt, format_system_message
-from services.sticky_notes_service import get_openai_functions, create_sticky_note
-from services.suggestion_service import generate_continuation_questions
+from services.chat.chat_system_prompts import get_citations_system_message, get_system_prompt, format_system_message
+from services.sticky_notes.sticky_notes_service import get_openai_functions, create_sticky_note
+from services.suggestions.suggestion_service import generate_continuation_questions
 
 """
 name: generate_chat_response

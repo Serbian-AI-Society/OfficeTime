@@ -3,7 +3,7 @@ import traceback
 from flask_restx import Resource, Namespace
 
 from core.authentication import authenticate
-from services.chat_response_service import generate_chat_response
+from services.chat.chat_response_service import generate_chat_response
 
 chat_controller_api = Namespace("api")
 
