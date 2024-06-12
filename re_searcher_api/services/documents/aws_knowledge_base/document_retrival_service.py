@@ -9,6 +9,7 @@ from srtools import cyrillic_to_latin
 
 from client import knowledge_base_client
 from consts import knowledge_base_id
+from core.deprecated_decorator import deprecated
 
 """
 name: get_document_citations
@@ -17,7 +18,8 @@ description: returns the citations array with formatted text from response body 
 """
 
 
-def get_document_citations(user_message, document_file_name):
+@deprecated
+def get_document_citations_from_aws(user_message, document_file_name):
     citations = []
 
     response = knowledge_base_client.retrieve(
@@ -47,6 +49,7 @@ response: returns a formatted sentence so the content fed to the OpenAI API is u
 """
 
 
+@deprecated
 def format_document_text(text):
     t_sentence = ""
     # In case cyrillic alphabet is used, convert it to latin

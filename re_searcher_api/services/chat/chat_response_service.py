@@ -1,7 +1,9 @@
 import json
 
 from client import openai_client
+from consts import use_aws_knowledge_base
 from services.chat.chat_system_prompts import get_citations_system_message, get_system_prompt, format_system_message
+from services.documents.aws_knowledge_base.document_retrival_service import get_document_citations_from_aws
 from services.sticky_notes.sticky_notes_service import get_openai_functions, create_sticky_note
 from services.suggestions.suggestion_service import generate_continuation_questions
 
@@ -109,3 +111,11 @@ In case list is shorter than 20 elements, it will display the whole list.
 def shorten_conversation(messages):
     messages = messages[-20:]
     return [message for message in messages if message.get("role") != "system"]
+
+
+def get_citations(user_message, filename):
+    if use_aws_knowledge_base:
+        return get_document_citations_from_aws(user_message, filename)
+
+    elif use_pinecone:
+        return
