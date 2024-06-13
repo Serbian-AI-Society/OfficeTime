@@ -24,11 +24,6 @@ Ovaj projekat se bavi razvojem **inteligentnog asistenta**. Njegova osnovna funk
 
 Cilj je omogućiti korisnicima jednostavno pretraživanje i upravljanje dokumentima, formulisanje pitanja, kreiranje beleški, generisanje paragrafa i definisanje tema i apstrakta dokumenata.
 
-## Testiranje aplikacije
-Aplikacija je podignuta na Cloud, tako da ju je moguće testirati bez pokretanja lokalno. Kako je backend podešen da se skalira na 0, moguće je da će prilikom prvog poziva biti potrebno nekoliko sekundi duže. 
-
-[https://flutter-prep-ded99.web.app/home](https://flutter-prep-ded99.web.app/home)
-
 # Dokumentacija PDF
 [RE:SEARCHER - Kompletna dokumentacija](https://github.com/Serbian-AI-Society/OfficeTime/blob/main/assets/REsearcher%20Dokumentacija.pdf)
 
