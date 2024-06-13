@@ -1,7 +1,7 @@
 import uuid
 
 from client import pinecone_index
-from consts import pinecone_index_name
+from consts import pinecone_index_name, citations_number
 
 
 def upsert_pinecone_vectors(vectors, chunks, filename, topics):
@@ -39,7 +39,7 @@ def query_pinecone_vectors(query_vector, filename=None, topic=None):
     pinecone_result = pinecone_index.query(
         namespace=pinecone_index_name,
         vector=query_vector,
-        top_k=5,
+        top_k=citations_number,
         # filter=metadata,
         include_metadata=True,
         include_values=True

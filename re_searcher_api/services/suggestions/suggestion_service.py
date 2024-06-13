@@ -1,7 +1,7 @@
 import json
 
 from client import openai_client
-from consts import openai_completions_model
+from consts import openai_completions_model, suggestions_max_tokes
 
 conversation_continuation_prompt_base = """
 Ti si konverzacioni asistent koji pomaže korisniku da nastavi razgovor sa AI asistentom.
@@ -33,7 +33,7 @@ def generate_continuation_questions(conversation_context):
     response = openai_client.completions.create(
         model=openai_completions_model,
         prompt=get_conversation_continuation_prompt(conversation),
-        max_tokens=150,
+        max_tokens=suggestions_max_tokes,
     )
 
     question_texts = response.choices[0].text

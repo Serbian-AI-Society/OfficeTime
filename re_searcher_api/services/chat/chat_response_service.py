@@ -1,7 +1,7 @@
 import json
 
 from client import openai_client
-from consts import use_aws_knowledge_base, openai_chat_model, use_pinecone
+from consts import use_aws_knowledge_base, openai_chat_model, use_pinecone, chat_max_tokens
 from services.chat.chat_system_prompts import get_citations_system_message, get_system_prompt, format_system_message
 from services.documents.aws_knowledge_base.document_retrival_service import get_document_citations_from_aws
 from services.documents.douments_service import get_citations_from_pinecone
@@ -40,7 +40,7 @@ def generate_chat_response(user_message_body):
         messages=conversation,
         tools=get_openai_functions(),
         tool_choice="auto",
-        max_tokens=300
+        max_tokens=chat_max_tokens
     )
 
     # 3.5 Check for function calls

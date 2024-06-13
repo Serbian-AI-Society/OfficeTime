@@ -9,8 +9,6 @@ class ChatRepositoryImpl implements ChatRepository {
   Dio dio;
 
   final String baseUrl = 'http://localhost:5000/api';
-  // final String baseUrl =
-  //     'https://researcher-api.jollymoss-e2c94ce0.westeurope.azurecontainerapps.io/api';
 
   ChatRepositoryImpl({
     required this.dio,

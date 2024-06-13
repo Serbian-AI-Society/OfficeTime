@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:re_searcher_ui/core/injection_container.dart';
-import 'package:re_searcher_ui/core/model/active_document.dart';
-import 'package:re_searcher_ui/core/model/chat_message.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
 import 'package:re_searcher_ui/features/chat/bloc/chat_bloc.dart';
 import 'package:re_searcher_ui/features/chat/ui/chat/ai_message.dart';
@@ -23,36 +21,6 @@ class ChatContainer extends StatefulWidget {
 class _ChatContainerState extends State<ChatContainer> {
   final _bloc = IC.getIt<ChatBloc>();
 
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-
-  bool _isMessagesEmpty = true;
-  List<ChatMessage> _messages = [];
-  ActiveDocument? _activeDocument;
-
-  void _addMessage(ChatMessage message) {
-    _messages.add(message);
-    setState(() {
-      _isMessagesEmpty = false;
-    });
-    _listKey.currentState?.insertItem(0);
-  }
-
-  void _setDocument(ActiveDocument? document) {
-    setState(() {
-      _activeDocument = document;
-    });
-  }
-
-  void _setAllMessages(List<ChatMessage> messages) {
-    _listKey.currentState?.removeAllItems((context, animation) => Container());
-    setState(() {
-      _messages = messages;
-    });
-
-    _listKey.currentState
-        ?.insertAllItems(0, _messages.length, duration: Durations.short1);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,9 +30,9 @@ class _ChatContainerState extends State<ChatContainer> {
         color: darkGray,
         border: Border.all(width: 2, color: lightGray),
       ),
-      child: BlocListener<ChatBloc, ChatState>(
+      child: BlocBuilder<ChatBloc, ChatState>(
         bloc: _bloc,
-        child: FractionallySizedBox(
+        builder: (context, state) => FractionallySizedBox(
           widthFactor: 0.95,
           alignment: Alignment.bottomCenter,
           child: Column(
@@ -72,15 +40,15 @@ class _ChatContainerState extends State<ChatContainer> {
               Expanded(
                 child: Stack(
                   children: [
-                    if (_isMessagesEmpty)
+                    if (state.visibleMessages.isEmpty)
                       NoMessagesContainer(
-                          filename: _activeDocument?.filename ?? "null"),
-                    AnimatedList(
-                      initialItemCount: _messages.length,
+                          filename: state.currentDocument?.filename ?? "null"),
+                    ListView.builder(
+                      itemCount: state.visibleMessages.length,
                       reverse: true,
-                      key: _listKey,
-                      itemBuilder: (context, index, animation) {
-                        var message = (_messages.reversed.toList())[index];
+                      itemBuilder: (context, index) {
+                        var message =
+                            (state.visibleMessages.reversed.toList())[index];
                         StatelessWidget bodyWidget;
 
                         if (message.role == "user") {
@@ -92,7 +60,7 @@ class _ChatContainerState extends State<ChatContainer> {
                         }
 
                         return _getChatMessageWidget(
-                            bodyWidget, message.role ?? "user", animation);
+                            bodyWidget, message.role ?? "user");
                       },
                     ),
                   ],
@@ -103,40 +71,19 @@ class _ChatContainerState extends State<ChatContainer> {
             ],
           ),
         ),
-        // listenWhen: (previous, current) =>
-        //     previous.visibleMessages.length != current.visibleMessages.length ||
-        //     current.currentDocument?.filename !=
-        //         previous.currentDocument?.filename,
-        listener: (context, state) {
-          if (_activeDocument?.filename != state.currentDocument?.filename) {
-            _setDocument(state.currentDocument);
-            _setAllMessages(state.visibleMessages);
-          } else if (_messages.length < state.visibleMessages.length) {
-            _addMessage(state.visibleMessages.last);
-            // for (int i = _messages.length;
-            //     i < state.visibleMessages.length;
-            //     i++) {
-            //   _addMessage(state.visibleMessages[i]);
-            // }
-          }
-        },
       ),
     );
   }
 
-  Widget _getChatMessageWidget(
-      Widget body, String author, Animation<double> animation) {
+  Widget _getChatMessageWidget(Widget body, String author) {
     var alignment =
         (author == "user") ? Alignment.centerRight : Alignment.centerLeft;
 
-    return SizeTransition(
-      sizeFactor: animation,
-      child: Align(
-        alignment: alignment,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: body,
-        ),
+    return Align(
+      alignment: alignment,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: body,
       ),
     );
   }

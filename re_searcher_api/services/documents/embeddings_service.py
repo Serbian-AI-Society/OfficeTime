@@ -1,11 +1,11 @@
 import pymupdf
 
 from client import openai_client
-from consts import openai_embeddings_model
+from consts import openai_embeddings_model, embeddings_chunk_size, embeddings_overlap_size
 
 
 # Function to chunk text
-def chunk_text(text, chunk_size=500, overlap=50):
+def chunk_text(text, chunk_size=embeddings_chunk_size, overlap=embeddings_overlap_size):
     words = text.split()
     chunks = []
     for i in range(0, len(words), chunk_size - overlap):

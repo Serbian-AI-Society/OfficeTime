@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:re_searcher_ui/core/model/chat_message.dart';
 import 'package:re_searcher_ui/core/ui/colors.dart';
@@ -14,13 +13,13 @@ class AiChatMessage extends StatelessWidget {
       builder: (BuildContext context) {
         return Dialog(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
+            constraints: const BoxConstraints(maxWidth: 600, maxHeight: 400),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(text),
+                  Expanded(child: SingleChildScrollView(child: Text(text))),
                   const SizedBox(height: 16),
                   TextButton(
                     child: const Text('OK'),
