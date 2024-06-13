@@ -29,7 +29,7 @@ class SideMenu extends StatelessWidget {
         description: "Sve o vinu i vinarstvu."),
     ActiveDocument(
         name: "Iron Maiden",
-        filename: "iron_maiden.pdf",
+        filename: "Iron_Maiden.pdf",
         description: "Biografija poznatog benda."),
     ActiveDocument(
         name: "Mačka",
