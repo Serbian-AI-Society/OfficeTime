@@ -2,7 +2,7 @@
 
 FROM python:3.9
 
-WORKDIR /wehkamp-ai-api
+WORKDIR /re-searcher-api
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
